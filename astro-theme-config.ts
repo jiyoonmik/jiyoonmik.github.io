@@ -98,41 +98,44 @@ const config = {
     /** Profile image URL. Leave empty to use the text-only About layout. */
     profileImage: '',
     name: 'jiyoonmik',
-    role: '배운 것과 만든 것을 기록합니다.',
+    role: 'AI Engineer · Data Scientist',
     location: 'Seoul, Korea',
-    focus: '기술, 프로젝트, 오래 남길 메모.',
-    lead: '배운 것, 만든 것, 다시 꺼내 보고 싶은 생각을 기록하는 공간입니다.',
-    headline: ['Notes worth', 'returning to.'],
+    focus: 'Anomaly Detection, Graph Modeling, MLOps, AI Engineering',
+    lead: '대용량 행동 로그 데이터의 이상 탐지와 그래프 모델링을 통한 사용자 행동 패턴 분석 등 다양한 도메인에서 새로운 기술 연구와 개발을 수행해왔습니다.',
+    headline: ['AI와 데이터를', '맥락 있게.'],
     statementLabel: 'About',
-    statementTitle: '차분히 쌓아가는 기록.',
+    statementTitle: '복잡한 문제를 체계적으로 해결하는 AI 엔지니어.',
     statement:
-      'GitHub 저장소에서 글과 코드를 함께 관리하고, Markdown으로 작성한 글을 Astro가 정적 페이지로 빌드합니다.',
-    careerLabel: 'Now',
-    careerHeading: '기록하는 것들',
+      '모델 개발에서 MLOps, AI Engineering까지 직무 영역을 확장하며 기술적 도전 속에서 지속적인 성장을 추구해왔습니다. 복잡한 문제를 체계적으로 해결하는 것을 즐기며, 함께 성장하는 동료가 되고자 합니다.',
+    careerLabel: 'Timeline',
+    careerHeading: '연구와 프로젝트',
     career: [
       {
-        period: 'Notes',
-        title: '학습 기록',
-        description: '새로 배운 개념과 시행착오를 짧고 명확하게 정리합니다.',
+        period: '2021.03 - 2023.02',
+        title: '이화여대 빅데이터분석학 석사',
+        description:
+          '학위논문 Diagnostic Classification of Ambient Sensor Data for Aging in Place Smart Home. 노인 일상 행동 데이터와 스마트홈 센서 패턴을 분석해 IADL 수행 능력 진단을 연구했습니다. Bag-Of-Sensors, LSTM, 앙상블 모델을 활용했습니다.',
       },
       {
-        period: 'Projects',
-        title: '프로젝트 기록',
-        description: '만든 것의 의도, 구조, 개선점을 남깁니다.',
+        period: '2023.12 - 2026.02',
+        title: '위즈베라 AI팀',
+        description:
+          'WIZCape 3차부터 6차까지 사용자 행동 분석 및 이상탐지 시스템을 개발했습니다. 직원 행동 로그 데이터를 기반으로 행동 패턴 분석, 이상탐지, Auto Encoder, TGN, Graph Modeling을 수행했습니다.',
       },
       {
-        period: 'Archive',
-        title: '참고 자료',
-        description: '나중에 다시 볼 만한 자료와 생각을 모읍니다.',
+        period: '2026.03',
+        title: '셀바스AI Edu-Tech',
+        description:
+          '똑똑수학탐험대 AI 기능 고도화 프로젝트를 수행했습니다. 학생 학습 데이터와 교과 콘텐츠 데이터를 기반으로 맞춤형 학습 추천, Vector & Graph RAG, Graph Modeling을 다뤘습니다.',
       },
     ],
     interests: [
-      '잘 읽히는 기술 문서',
-      '작게 만들고 자주 개선하는 프로젝트',
-      '시간이 지나도 다시 이해되는 기록',
+      '대용량 행동 로그 데이터 기반 이상탐지',
+      '그래프 모델링을 통한 사용자 행동 패턴 분석',
+      '서비스에 연결되는 MLOps와 AI Engineering',
     ],
     interestsLabel: 'Interests',
-    interestsHeading: '관심 있는 주제',
+    interestsHeading: '계속 확장하고 싶은 영역',
   },
 };
 
