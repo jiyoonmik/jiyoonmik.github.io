@@ -1,0 +1,45 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+const { entry } = Astro.props;
+const { title, description, pubDate, updatedDate, tags } = entry.data;
+const formattedDate = pubDate.toLocaleDateString('ko-KR', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<BaseLayout title={`${title} | GitHub Blog`} description={description}>
+  <article class="post-body">
+    <p class="post-meta">{formattedDate}</p>
+    <h1>{title}</h1>
+    <p class="lede">{description}</p>
+    {
+      updatedDate && (
+        <p class="post-meta">
+          업데이트: {updatedDate.toLocaleDateString('ko-KR')}
+        </p>
+      )
+    }
+    {
+      tags.length > 0 && (
+        <div class="tag-list" aria-label="Tags">
+          {tags.map((tag: string) => (
+            <span class="tag">{tag}</span>
+          ))}
+        </div>
+      )
+    }
+    <hr />
+    <slot />
+  </article>
+</BaseLayout>
+
+<style>
+  hr {
+    margin: 36px 0;
+    border: 0;
+    border-top: 1px solid var(--line);
+  }
+</style>

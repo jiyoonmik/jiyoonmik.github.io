@@ -1,0 +1,37 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const posts = (await getCollection('blog'))
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const baseUrl = import.meta.env.BASE_URL;
+---
+
+<BaseLayout>
+  <section>
+    <h1>글 모음</h1>
+    <p class="lede">GitHub Pages에서 운영하는 기술 블로그입니다.</p>
+  </section>
+
+  <section class="post-list" aria-label="Blog posts">
+    {
+      posts.map((post) => (
+        <a class="post-card" href={`${baseUrl}blog/${post.id}/`}>
+          <p class="post-meta">
+            {post.data.pubDate.toLocaleDateString('ko-KR')}
+          </p>
+          <h2>{post.data.title}</h2>
+          <p>{post.data.description}</p>
+          {post.data.tags.length > 0 && (
+            <div class="tag-list" aria-label="Tags">
+              {post.data.tags.map((tag) => (
+                <span class="tag">{tag}</span>
+              ))}
+            </div>
+          )}
+        </a>
+      ))
+    }
+  </section>
+</BaseLayout>
