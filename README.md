@@ -1,6 +1,6 @@
-# GitHub Blog
+# Jiyoon Blog
 
-Astro와 Markdown으로 만든 GitHub Pages용 블로그입니다.
+Astro Tone 테마와 Markdown으로 만든 GitHub Pages용 블로그입니다.
 
 ## 로컬 실행
 
@@ -19,8 +19,8 @@ npm run dev
 ---
 title: "글 제목"
 description: "글 설명"
-pubDate: 2026-05-31
-tags: ["note"]
+pubDate: "2026-05-31"
+category: "Notes"
 ---
 
 본문을 Markdown으로 작성합니다.
@@ -31,8 +31,6 @@ tags: ["note"]
 1. GitHub 저장소에 코드를 push합니다.
 2. 저장소 `Settings` -> `Pages`로 이동합니다.
 3. `Build and deployment`의 Source를 `GitHub Actions`로 설정합니다.
-4. `astro.config.mjs`의 `site` 값을 실제 주소로 바꿉니다.
-   - 사용자 사이트: `https://username.github.io`
-   - 프로젝트 사이트: `https://username.github.io/repository-name`
+4. 사이트 이름, 소개 문구, 프로필 내용은 `astro-theme-config.ts`에서 수정합니다.
 
-프로젝트 사이트를 쓴다면 `astro.config.mjs`에 `base: '/repository-name'`도 추가하세요.
+사용자 사이트 저장소(`jiyoonmik.github.io`)는 루트 주소로 배포됩니다. 프로젝트 저장소에 배포하면 GitHub Actions가 저장소 이름을 기준으로 `base` 값을 자동 설정합니다.

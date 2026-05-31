@@ -1,8 +1,10 @@
 ---
-title: "GitHub 블로그 시작하기"
-description: "Astro와 GitHub Pages로 블로그를 시작합니다."
-pubDate: 2026-05-31
-tags: ["astro", "github-pages"]
+title: 'GitHub 블로그 시작하기'
+description: 'Astro와 GitHub Pages로 블로그를 시작합니다.'
+pubDate: '2026-05-31'
+category: 'Tech'
+heroImage: '../../assets/tone-sample-ai-water.jpg'
+homeFeatured: true
 ---
 
 이 블로그는 Astro와 Markdown을 사용합니다.
