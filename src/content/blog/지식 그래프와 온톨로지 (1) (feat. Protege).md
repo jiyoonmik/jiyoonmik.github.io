@@ -3,10 +3,10 @@ title: '지식 그래프와 온톨로지 (feat. Protege, Neo4j) (1)'
 description: 'GraphRAG 프로젝트를 계기로 정리한 지식 그래프, 온톨로지, Protege, Neo4j 기초 개념'
 pubDate: '2026-05-31'
 category: 'Tech'
-heroImage: '../../assets/tone-sample-ai-water.jpg'
+heroImage: 'https://opendata.mofa.go.kr/lod/images/ontology_property.png'
 homeFeatured: true
 ---
-태그: 지식그래프, 온톨로지, protege, neo4j
+`지식그래프`, `온톨로지`, `protege`, `neo4j`
 
 GraphRAG 기반 AI 시스템 프로젝트에서 그래프 구축 업무도 담당하게 되면서 막연하게 주먹구구 식으로 지식 그래프에 대해서 기초가 부족함을 느껴서 정리가 필요하다고 느껴져 온톨로지부터 그래프 데이터베이스까지 일단 간략하게 짚어보면서 기록해두려고 한다.
 
