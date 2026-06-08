@@ -1,5 +1,5 @@
 ---
-title: '지식 그래프와 온톨로지 (feat. Protege, Neo4j) (1)'
+title: '지식 그래프와 온톨로지 (1) (feat. Protege)'
 description: 'GraphRAG 프로젝트를 계기로 정리한 지식 그래프, 온톨로지, Protege, Neo4j 기초 개념'
 pubDate: '2026-06-07'
 category: 'Tech'
