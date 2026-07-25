@@ -1,125 +1,115 @@
 ---
 import '../styles/pages/home.css';
-import { Image } from 'astro:assets';
-import { getCollection } from 'astro:content';
-import FeaturedPostGrid from '../components/FeaturedPostGrid.astro';
-import FormattedDate from '../components/FormattedDate.astro';
+import config from '../../astro-theme-config';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
-import { getUiText } from '../ui';
 import { withBase } from '../utils/paths';
-const tr = getUiText();
 
-const posts = (await getCollection('blog'))
-  .filter((p) => !p.data.draft)
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const profileImageUrl = config.about.profileImage.trim();
+const profileName = config.about.name || config.site.author;
+const profileRole = config.about.role;
+const profileLocation = config.about.location;
+const profileFocus = config.about.focus;
+const statementTitle = config.about.statementTitle;
+const statement = config.about.statement;
+const [headlineFirst, headlineSecond] = config.about.headline;
+const careerLabel = config.about.careerLabel;
+const careerHeading = config.about.careerHeading;
+const careerItems = config.about.career;
+const focusItems = config.about.interests;
+const interestsLabel = config.about.interestsLabel;
+const interestsHeading = config.about.interestsHeading;
 
-const featured = posts.find((post) => post.data.homeFeatured) ?? posts[0];
-const pinnedHeroPosts = posts
-  .filter((post) => post.data.homeHeroOrder)
-  .sort((a, b) => {
-    const orderDelta = (a.data.homeHeroOrder ?? 0) - (b.data.homeHeroOrder ?? 0);
-    if (orderDelta !== 0) return orderDelta;
-    return b.data.pubDate.valueOf() - a.data.pubDate.valueOf();
-  });
-const fallbackHeroPosts = posts.filter((post) => !post.data.homeHeroOrder);
-const heroPosts = [...pinnedHeroPosts, ...fallbackHeroPosts].slice(0, 2);
-const gridCandidates = posts.filter((post) => post.id !== featured?.id);
-const pinnedGridPosts = gridCandidates
-  .filter((post) => post.data.homeOrder)
-  .sort((a, b) => {
-    const orderDelta = (a.data.homeOrder ?? 0) - (b.data.homeOrder ?? 0);
-    if (orderDelta !== 0) return orderDelta;
-    return b.data.pubDate.valueOf() - a.data.pubDate.valueOf();
-  });
-const fallbackGridPosts = gridCandidates.filter((post) => !post.data.homeOrder);
-const gridPosts = [...pinnedGridPosts, ...fallbackGridPosts].slice(0, 3);
+const getIcon = (name: string) => {
+  if (name === 'GitHub') return `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>`;
+  if (name === 'LinkedIn') return `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>`;
+  if (name === 'Email') return `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>`;
+  if (name === 'Blog') return `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>`;
+  return '';
+};
+
+const links = [
+  { label: 'GitHub', href: config.social.github, icon: getIcon('GitHub') },
+  { label: 'LinkedIn', href: config.social.linkedin, icon: getIcon('LinkedIn') },
+  { label: 'Blog', href: withBase('/blog'), icon: getIcon('Blog') },
+  { label: 'Email', href: config.social.email ? `mailto:${config.social.email}` : '', icon: getIcon('Email') },
+].filter((link) => link.href);
 ---
 
 <BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
-  <main id="main-content" class="home-main">
-    <section class="hero">
-      <h1 class="hero-title">
-        <span class="hero-title-line">{tr.heroTitle}</span>
-        {
-          tr.heroTitleLine2 && (
-            <span class="hero-title-line hero-title-line--accent">{tr.heroTitleLine2}</span>
-          )
-        }
-      </h1>
-
-      <p class="hero-desc">{SITE_DESCRIPTION}</p>
-
-      <div class="hero-divider" aria-hidden="true"></div>
-
-      {
-        heroPosts.length > 0 && (
-          <nav class="hero-recent" aria-label="Selected posts">
-            <div class="hero-recent-list">
-              {heroPosts.map((post) => (
-                <a href={withBase(`/blog/${post.id}/`)} class="hero-recent-item">
-                  <span class="hero-recent-main">
-                    <span class="hero-recent-title">{post.data.title}</span>
-                    <span class="hero-recent-arrow" aria-hidden="true">
-                      ↗
-                    </span>
-                  </span>
-                  <span class="hero-recent-date">
-                    <FormattedDate date={post.data.pubDate} />
-                  </span>
-                </a>
-              ))}
-            </div>
-          </nav>
-        )
-      }
+  <main id="main-content" class="home-layout-main">
+    
+    <!-- 1. Profile Header (Left Image, Right Info) -->
+    <section class="profile-header">
+      <div class="profile-avatar">
+        <img src={profileImageUrl} alt={profileName} />
+      </div>
+      <div class="profile-info">
+        <h1 class="profile-name-lg">{profileName}</h1>
+        <h2 class="profile-role-lg">{profileRole}</h2>
+        <dl class="profile-details">
+          <div class="detail-row">
+            <dt>Location</dt>
+            <dd>{profileLocation}</dd>
+          </div>
+          <div class="detail-row">
+            <dt>Focus</dt>
+            <dd>{profileFocus}</dd>
+          </div>
+        </dl>
+      </div>
     </section>
 
-    {
-      featured && (
-        <section class="featured-section">
-          <a href={withBase(`/blog/${featured.id}/`)} class="featured-card">
-            <div class="featured-text">
-              <p class="featured-meta">
-                <FormattedDate date={featured.data.pubDate} />
-              </p>
-              <h2 class="featured-title">{featured.data.title}</h2>
-              {featured.data.description && (
-                <p class="featured-desc">{featured.data.description}</p>
-              )}
-              <span class="featured-cta">{tr.readLink}</span>
-            </div>
-            <div class="featured-thumb-wrap">
-              {featured.data.heroImage ? (
-                <Image
-                  src={featured.data.heroImage}
-                  alt={featured.data.title}
-                  class="featured-thumb"
-                  widths={[400, 720, 960, 1280]}
-                  sizes="(max-width: 600px) calc(100vw - 32px), 360px"
-                  quality={88}
-                  loading="lazy"
-                />
-              ) : (
-                <div class="featured-thumb card-img-placeholder" />
-              )}
-            </div>
-          </a>
-        </section>
-      )
-    }
+    <!-- 2. App-like Links (Rounded Squares) -->
+    <section class="profile-links-section">
+      {links.map((link) => (
+        <a 
+          href={link.href} 
+          class="app-link"
+          target={link.href.startsWith('mailto:') || link.href.startsWith('/') ? undefined : '_blank'}
+          rel={link.href.startsWith('mailto:') || link.href.startsWith('/') ? undefined : 'noopener'}
+        >
+          <div class="app-icon" set:html={link.icon} />
+          <span class="app-label">{link.label}</span>
+        </a>
+      ))}
+    </section>
 
-    {
-      gridPosts.length > 0 && (
-        <section class="posts-section">
-          <div class="posts-header">
-            <a href={withBase('/blog')} class="view-all">
-              {tr.viewAll}
-            </a>
-          </div>
-          <FeaturedPostGrid posts={gridPosts} />
-        </section>
-      )
-    }
+    <!-- 3. About Section (Border Top & Bottom) -->
+    <section class="about-statement-section">
+      <h3 class="about-heading">ABOUT.</h3>
+      <div class="about-content">
+        <h4 class="about-headline-text">복잡한 문제를 체계적으로 해결하는 AI 엔지니어</h4>
+        <p class="about-statement-text">대용량 행동 로그의 이상 탐지부터 지식 그래프 기반의 행동 패턴 분석까지, 다양한 도메인에서 AI와 데이터를 맥락 있게 연결하는 연구와 개발을 수행해왔습니다. 모델 개발을 넘어 MLOps와 AI Engineering으로 영역을 넓히며 끊임없이 기술적 한계에 도전합니다. 복잡한 문제 속에서 체계적인 해결책을 찾고, 팀과 함께 성장해 나가는 든든한 동료가 되고자 합니다.</p>
+      </div>
+    </section>
+
+    <!-- 4. Career and Timeline -->
+    <section class="career-section">
+      <h3 class="section-label">{careerLabel}</h3>
+      <div class="career-list">
+        {careerItems.map((item) => (
+          <article class="career-item">
+            <time>{item.period}</time>
+            <div>
+              <h4 class="career-title">{item.title}</h4>
+              <p>{item.description}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- 5. Interests / Focus -->
+    <section class="focus-section">
+      <h3 class="section-label">{interestsLabel}</h3>
+      <div>
+        <h4 class="career-title">{interestsHeading}</h4>
+        <ul class="focus-list">
+          {focusItems.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+    </section>
+
   </main>
 </BaseLayout>

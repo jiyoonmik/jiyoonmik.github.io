@@ -20,7 +20,7 @@ const config = {
     locale: 'ko_KR',
     dateLocale: 'ko-KR',
     title: 'Jiyoon Blog',
-    logoLabel: 'Jiyoon',
+    logoLabel: 'JunemiK',
     description: '배운 것과 만든 것을 차분히 기록하는 개인 블로그입니다.',
     author: 'jiyoonmik',
     /** Optional absolute or root-relative image URL for homepage/search/about social previews. */
@@ -31,13 +31,11 @@ const config = {
   // Example: [{ label: 'Blog', href: '/blog' }, { label: 'About', href: '/about' }]
   nav: [
     { label: 'Blog', href: '/blog' },
-    { label: 'About', href: '/about' },
   ] as NavItem[],
 
   // Footer links stay visible by default so readers have a stable way to move around.
   footerNav: [
     { label: 'Blog', href: '/blog' },
-    { label: 'About', href: '/about' },
     { label: 'Search', href: '/search' },
   ] as NavItem[],
 
@@ -96,8 +94,8 @@ const config = {
 
   about: {
     /** Profile image URL. Leave empty to use the text-only About layout. */
-    profileImage: '',
-    name: 'June Kim',
+    profileImage: '/profile.png',
+    name: 'Jiyoon Kim',
     role: 'AI Engineer · Data Scientist',
     location: 'Seoul, Korea',
     focus: 'Anomaly Detection, Graph Modeling, MLOps, AI Engineering',
@@ -114,13 +112,13 @@ const config = {
         period: '2026.03 - Current',
         title: '셀바스AI Edu-Tech',
         description:
-          '똑똑수학탐험대 AI 기능 고도화 프로젝트를 수행했습니다. 학생 학습 데이터와 교과 콘텐츠 데이터를 기반으로 맞춤형 학습 추천, Vector & Graph RAG을 다루며 지식 그래프 기반 AI 시스템을 개발하고 있습니다.',
+          'KERIS AI 기능 개발 및 고도화 프로젝트들을 수행하고 있습니다. 학생 학습 데이터와 교과 콘텐츠 데이터를 기반으로 맞춤형 학습 추천, Vector & Graph RAG을 다루며 지식 그래프 기반 AI 시스템을 개발하고 있습니다.',
       },
       {
         period: '2023.12 - 2026.02',
         title: '위즈베라 AI팀',
         description:
-          'WIZCape 3차부터 6차까지 사용자 행동 분석 및 이상탐지 시스템을 개발했습니다. 직원 행동 로그 데이터를 기반으로 행동 패턴 분석, 이상탐지, Auto Encoder, TGN, Graph Modeling을 수행했습니다.',
+          'WIZCape 3차부터 6차까지 사용자 행동 분석 및 이상탐지 시스템 개발 프로젝트를 수행했습니다. 직원 행동 로그 데이터를 기반으로 행동 패턴 분석, 이상탐지, Auto Encoder, TGN, Graph Modeling을 수행했습니다.',
       },
       {
         period: '2021.03 - 2023.02',
