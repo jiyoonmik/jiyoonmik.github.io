@@ -98,7 +98,7 @@ const config = {
     name: 'Jiyoon Kim',
     role: 'AI Engineer · Data Scientist',
     location: 'Seoul, Korea',
-    focus: 'Anomaly Detection, Graph Modeling, MLOps, AI Engineering',
+    focus: 'Human Activities, Graph Modeling, AI Engineering, MLOps',
     lead: '대용량 행동 로그 데이터의 이상 탐지와 그래프 모델링을 통한 사용자 행동 패턴 분석 등 다양한 도메인에서 새로운 기술 연구와 개발을 수행해왔습니다.',
     headline: ['AI와 데이터를 맥락 있게.'],
     statementLabel: 'About',
@@ -133,7 +133,6 @@ const config = {
       'AI Governance와 Responsible AI',
     ],
     interestsLabel: 'Interests',
-    interestsHeading: '계속 확장하고 싶은 영역',
   },
 };
 
