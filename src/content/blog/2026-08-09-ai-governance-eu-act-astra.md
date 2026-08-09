@@ -1,13 +1,13 @@
 ---
 title: "오픈AI 'Astra' 사태와 EU AI Act 발효: 통제 불능 AI와 거버넌스의 시작"
+description: 'AI Governance, EU AI Act, OpenAI, Agentic AI, AI Safety'
 pubDate: '2026-08-09'
 category: 'Tech'
-description: 'AI Governance, EU AI Act, OpenAI, Agentic AI, AI Safety'
 ---
 
 **2026년 8월 2일, EU AI Act(인공지능법)가 공식적으로 발효되었다.**
 
-요즘 AI 거버넌스 관련 뉴스들을 계속 팔로업하다 보니, 이 시점을 기점으로 글로벌 AI 시장의 핵심 어젠다가 완전히 넘어갔다는 생각이 든다. 기존에는 그저 '더 똑똑하고 파라미터가 큰' 모델을 만드는 데 혈안이 되어 있었다면, 이제는 **안전(Safety)**과 **규제 준수(Compliance)**라는 현실적인 벽을 마주하고 있는 느낌이다.
+이로써 단순히 '더 똑똑하고 거대한' AI를 만드는 데 몰두하던 시대를 지나, **안전(Safety)**과 **규제 준수(Compliance)**라는 새로운 룰을 지키지 못하면 비즈니스 자체가 불가능해지는 시대가 본격적으로 막을 올렸다. 글로벌 AI 시장의 규칙이 근본적으로 뒤바뀐 것이다.
 
 최근 가장 눈에 띄었던 흐름은 두 가지다. 하나는 앞서 말한 EU AI Act의 투명성 의무가 2026년 8월 2일부터 본격적으로 적용되기 시작했다는 점이다. 다른 하나는 OpenAI의 차세대 에이전트형 모델로 알려진 **Astra** 관련 보도다. 외신에서는 OpenAI가 Astra의 일부 개발 또는 공개 일정을 늦추고, 보안 기준을 충족하지 못하는 내부 활동을 멈췄다고 전했다.
 
