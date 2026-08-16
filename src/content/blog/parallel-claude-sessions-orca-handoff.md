@@ -1,5 +1,5 @@
 ---
-title: "Claude Code 세션을 여러 개 띄워 일하기: HANDOFF.md에서 SendMessage까지"
+title: "Claude Code 멀티 세션으로 일하기: HANDOFF.md에서 SendMessage까지"
 description: "한 레포를 세 세션이 나눠 만지면서 겪은 충돌과, 인수인계 문서·Orca·세션 간 메시징으로 정리해본 기록."
 pubDate: "2026-08-16"
 category: "Tech"
