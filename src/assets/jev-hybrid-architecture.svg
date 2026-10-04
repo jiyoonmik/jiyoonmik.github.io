@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430" role="img" aria-labelledby="title desc">
+  <title id="title">Jev와 LLM을 함께 쓰는 판단 계층</title>
+  <desc id="desc">입력이 Jev 판단 모델을 거쳐 확률 정보를 받고, 정책 코드가 자동 경로, LLM 추론, 사람 검토 중 하나로 연결한다.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#52647a"/>
+    </marker>
+    <style>
+      .box { rx: 18; stroke-width: 2; }
+      .label { font: 700 24px sans-serif; fill: #172033; text-anchor: middle; }
+      .sub { font: 400 17px sans-serif; fill: #46556b; text-anchor: middle; }
+      .arrow { fill: none; stroke: #52647a; stroke-width: 3; marker-end: url(#arrow); }
+      .small { font: 600 16px sans-serif; fill: #52647a; text-anchor: middle; }
+    </style>
+  </defs>
+  <rect width="1200" height="430" rx="24" fill="#f7f9fc"/>
+  <text x="600" y="48" class="label">Jev는 먼저 판단하고, 정책 코드가 다음 행동을 정한다</text>
+
+  <rect class="box" x="40" y="155" width="205" height="120" fill="#ffffff" stroke="#b8c6d8"/>
+  <text x="142" y="204" class="label">입력</text>
+  <text x="142" y="238" class="sub">문의 · 요청 · 상태</text>
+
+  <rect class="box" x="315" y="135" width="245" height="160" fill="#e8f2ff" stroke="#76a9e8"/>
+  <text x="437" y="193" class="label">Jev</text>
+  <text x="437" y="228" class="sub">분류 · 예/아니오 · 점수</text>
+  <text x="437" y="258" class="sub">값과 확률 신호</text>
+
+  <rect class="box" x="635" y="135" width="245" height="160" fill="#fff4db" stroke="#e8bd61"/>
+  <text x="757" y="193" class="label">정책 코드</text>
+  <text x="757" y="228" class="sub">임계값 · 업무 규칙</text>
+  <text x="757" y="258" class="sub">자동화 여부 결정</text>
+
+  <rect class="box" x="965" y="75" width="195" height="90" fill="#e8f7ee" stroke="#74bd8b"/>
+  <text x="1062" y="113" class="label">자동 처리</text>
+  <text x="1062" y="141" class="sub">명확한 경우</text>
+
+  <rect class="box" x="965" y="190" width="195" height="90" fill="#f0eaff" stroke="#a28ad8"/>
+  <text x="1062" y="228" class="label">LLM</text>
+  <text x="1062" y="256" class="sub">생성 · 추론</text>
+
+  <rect class="box" x="965" y="305" width="195" height="75" fill="#fff0ef" stroke="#dc918a"/>
+  <text x="1062" y="339" class="label">사람 검토</text>
+  <text x="1062" y="363" class="sub">불확실 · 고위험</text>
+
+  <path class="arrow" d="M245 215 H305"/>
+  <path class="arrow" d="M560 215 H625"/>
+  <path class="arrow" d="M880 185 C915 160 925 120 955 120"/>
+  <path class="arrow" d="M880 215 H955"/>
+  <path class="arrow" d="M880 245 C915 275 925 342 955 342"/>
+  <text x="918" y="91" class="small">확신 높음</text>
+  <text x="918" y="186" class="small">설명 필요</text>
+  <text x="918" y="313" class="small">확신 낮음</text>
+</svg>
