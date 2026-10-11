@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+  <title id="title">별도 벡터·그래프 저장소와 LatticeDB 비교</title>
+  <desc id="desc">기존 구성은 Weaviate 벡터 검색과 Neo4j 그래프 탐색을 애플리케이션이 이어 붙이고, LatticeDB는 하나의 로컬 파일에서 그래프·벡터·BM25 검색을 처리한다.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#52647a"/>
+    </marker>
+    <style>
+      .panel { fill: #fff; stroke: #d5deea; stroke-width: 2; }
+      .box { rx: 16; stroke-width: 2; }
+      .head { font: 700 26px sans-serif; fill: #172033; text-anchor: middle; }
+      .label { font: 700 21px sans-serif; fill: #172033; text-anchor: middle; }
+      .sub { font: 400 16px sans-serif; fill: #46556b; text-anchor: middle; }
+      .tiny { font: 600 15px sans-serif; fill: #52647a; text-anchor: middle; }
+      .arrow { fill: none; stroke: #52647a; stroke-width: 3; marker-end: url(#arrow); }
+    </style>
+  </defs>
+  <rect width="1200" height="600" rx="24" fill="#f5f7fb"/>
+  <text x="600" y="48" class="head">두 저장소를 오가던 검색을 한 엔진에서 다루는 선택</text>
+
+  <rect class="panel" x="28" y="82" width="535" height="480" rx="20"/>
+  <text x="295" y="125" class="head">분리된 검색 스택</text>
+  <rect class="box" x="66" y="176" width="190" height="112" fill="#e8f2ff" stroke="#76a9e8"/>
+  <text x="161" y="219" class="label">Weaviate</text>
+  <text x="161" y="250" class="sub">벡터 · BM25 검색</text>
+  <rect class="box" x="338" y="176" width="190" height="112" fill="#e8f7ee" stroke="#74bd8b"/>
+  <text x="433" y="219" class="label">Neo4j</text>
+  <text x="433" y="250" class="sub">그래프 탐색</text>
+  <rect class="box" x="176" y="360" width="240" height="100" fill="#fff4db" stroke="#e8bd61"/>
+  <text x="296" y="400" class="label">애플리케이션</text>
+  <text x="296" y="430" class="sub">결과 연결 · 동기화</text>
+  <path class="arrow" d="M161 288 C161 323 218 330 250 352"/>
+  <path class="arrow" d="M433 288 C433 323 375 330 344 352"/>
+  <text x="296" y="510" class="tiny">두 서비스 운영 · 데이터 경계 연결</text>
+
+  <rect class="panel" x="585" y="82" width="587" height="480" rx="20"/>
+  <text x="878" y="125" class="head">LatticeDB</text>
+  <rect class="box" x="650" y="168" width="455" height="292" fill="#f1edff" stroke="#a28ad8"/>
+  <text x="878" y="208" class="label">앱 안에서 여는 단일 파일</text>
+  <rect class="box" x="680" y="244" width="118" height="96" fill="#e8f7ee" stroke="#74bd8b"/>
+  <text x="739" y="282" class="label">그래프</text>
+  <text x="739" y="311" class="sub">관계 탐색</text>
+  <rect class="box" x="819" y="244" width="118" height="96" fill="#e8f2ff" stroke="#76a9e8"/>
+  <text x="878" y="282" class="label">HNSW</text>
+  <text x="878" y="311" class="sub">벡터 검색</text>
+  <rect class="box" x="958" y="244" width="118" height="96" fill="#fff4db" stroke="#e8bd61"/>
+  <text x="1017" y="282" class="label">BM25</text>
+  <text x="1017" y="311" class="sub">전문 검색</text>
+  <path class="arrow" d="M739 356 V385 H878"/>
+  <path class="arrow" d="M878 356 V385"/>
+  <path class="arrow" d="M1017 356 V385 H878"/>
+  <text x="878" y="423" class="sub">하나의 쿼리 계층 · 같은 데이터</text>
+  <text x="878" y="510" class="tiny">단일 프로세스 · 단일 작성자 모델</text>
+</svg>
