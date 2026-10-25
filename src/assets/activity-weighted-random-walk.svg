@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" role="img" aria-labelledby="title desc">
+  <title id="title">활동 강도를 가중치로 쓰는 사용자-콘텐츠 그래프의 3단계 random walk</title>
+  <desc id="desc">사용자와 콘텐츠가 활동 강도만큼 굵은 엣지로 연결되어 있다. 나에게서 출발한 walk가 내가 깊게 본 콘텐츠, 그 콘텐츠를 깊게 본 다른 사용자, 그 사용자가 깊게 본 새 콘텐츠 순서로 세 단계를 이동하고, 도착한 콘텐츠는 인기도로 나눠 점수를 낸다.</desc>
+  <defs>
+    <marker id="walk" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#c98a1f"/>
+    </marker>
+    <style>
+      .title { font: 700 24px sans-serif; fill: #172033; text-anchor: middle; }
+      .col { font: 700 18px sans-serif; fill: #52647a; text-anchor: middle; }
+      .node { font: 600 17px sans-serif; fill: #172033; text-anchor: middle; }
+      .sub { font: 400 15px sans-serif; fill: #46556b; }
+      .edge { stroke: #9aa9bd; fill: none; stroke-linecap: round; }
+      .path { stroke: #c98a1f; fill: none; stroke-width: 3; stroke-dasharray: 9 7; marker-end: url(#walk); }
+      .step { font: 700 16px sans-serif; fill: #a86f12; text-anchor: middle; paint-order: stroke; stroke: #f7f9fc; stroke-width: 6px; stroke-linejoin: round; }
+    </style>
+  </defs>
+  <rect width="1200" height="560" rx="24" fill="#f7f9fc"/>
+  <text x="600" y="48" class="title">굵게 이어진 길을 따라 걸을수록 더 자주 도착한다</text>
+
+  <text x="250" y="100" class="col">사용자</text>
+  <text x="650" y="100" class="col">콘텐츠</text>
+
+  <!-- weighted edges: thickness = activity intensity -->
+  <path class="edge" stroke-width="10" d="M300 160 L600 150"/>
+  <path class="edge" stroke-width="3" d="M300 160 L600 250"/>
+  <path class="edge" stroke-width="8" d="M300 280 L600 150"/>
+  <path class="edge" stroke-width="10" d="M300 280 L600 350"/>
+  <path class="edge" stroke-width="2" d="M300 280 L600 450"/>
+  <path class="edge" stroke-width="3" d="M300 400 L600 150"/>
+  <path class="edge" stroke-width="9" d="M300 400 L600 450"/>
+  <path class="edge" stroke-width="2" d="M300 400 L600 250"/>
+
+  <!-- user nodes -->
+  <circle cx="250" cy="160" r="42" fill="#e8f2ff" stroke="#76a9e8" stroke-width="3"/>
+  <text x="250" y="166" class="node">나</text>
+  <circle cx="250" cy="280" r="42" fill="#ffffff" stroke="#b8c6d8" stroke-width="2"/>
+  <text x="250" y="286" class="node">사용자 B</text>
+  <circle cx="250" cy="400" r="42" fill="#ffffff" stroke="#b8c6d8" stroke-width="2"/>
+  <text x="250" y="406" class="node">사용자 C</text>
+
+  <!-- content nodes -->
+  <rect x="600" y="122" width="150" height="56" rx="14" fill="#ffffff" stroke="#b8c6d8" stroke-width="2"/>
+  <text x="675" y="156" class="node">콘텐츠 1</text>
+  <rect x="600" y="222" width="150" height="56" rx="14" fill="#ffffff" stroke="#b8c6d8" stroke-width="2"/>
+  <text x="675" y="256" class="node">콘텐츠 2</text>
+  <rect x="600" y="322" width="150" height="56" rx="14" fill="#e8f7ee" stroke="#74bd8b" stroke-width="3"/>
+  <text x="675" y="356" class="node">콘텐츠 3</text>
+  <rect x="600" y="422" width="150" height="56" rx="14" fill="#ffffff" stroke="#b8c6d8" stroke-width="2"/>
+  <text x="675" y="456" class="node">콘텐츠 4</text>
+
+  <!-- walk path -->
+  <path class="path" d="M292 132 C400 105 500 105 592 128"/>
+  <text x="445" y="100" class="step">① 내가 깊게 본 콘텐츠로</text>
+  <path class="path" d="M598 172 C520 230 420 250 300 252"/>
+  <text x="455" y="222" class="step">② 그걸 깊게 본 사용자로</text>
+  <path class="path" d="M296 312 C400 345 500 360 590 360"/>
+  <text x="430" y="385" class="step">③ 그 사용자가 깊게 본 콘텐츠로</text>
+
+  <!-- legend -->
+  <rect x="820" y="130" width="340" height="330" rx="18" fill="#ffffff" stroke="#d5dde8" stroke-width="2"/>
+  <text x="845" y="168" class="sub" style="font-weight:700;fill:#172033">엣지 두께 = 활동 강도</text>
+  <line x1="845" y1="200" x2="905" y2="200" class="edge" stroke-width="2"/>
+  <text x="920" y="205" class="sub">조회만 함</text>
+  <line x1="845" y1="232" x2="905" y2="232" class="edge" stroke-width="6"/>
+  <text x="920" y="237" class="sub">끝까지 봄</text>
+  <line x1="845" y1="264" x2="905" y2="264" class="edge" stroke-width="10"/>
+  <text x="920" y="269" class="sub">반복 · 북마크</text>
+  <text x="845" y="318" class="sub">각 단계의 이동 확률은</text>
+  <text x="845" y="342" class="sub">출발 노드 엣지 가중치의 비율</text>
+  <text x="845" y="390" class="sub" style="font-weight:700;fill:#a86f12">도착 점수 ÷ 인기도^β</text>
+  <text x="845" y="414" class="sub">모두가 본 콘텐츠만</text>
+  <text x="845" y="438" class="sub">올라오지 않게 감점</text>
+</svg>
