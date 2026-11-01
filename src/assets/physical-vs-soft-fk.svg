@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="500" viewBox="0 0 1200 500" role="img" aria-labelledby="title desc">
+  <title id="title">물리 FK와 soft FK에서 참조 무결성을 지키는 위치</title>
+  <desc id="desc">물리 FK에서는 데이터베이스가 쓰기 시점에 참조를 검사한다. soft FK에서는 데이터베이스는 컬럼과 인덱스만 두고, 애플리케이션 검증과 주기적인 고아 데이터 점검이 그 역할을 나눠 맡는다.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#52647a"/>
+    </marker>
+    <style>
+      .box { rx: 16; stroke-width: 2; }
+      .title { font: 700 24px sans-serif; fill: #172033; text-anchor: middle; }
+      .head { font: 700 20px sans-serif; fill: #172033; text-anchor: middle; }
+      .label { font: 700 18px sans-serif; fill: #172033; text-anchor: middle; }
+      .sub { font: 400 15px sans-serif; fill: #46556b; text-anchor: middle; }
+      .arrow { fill: none; stroke: #52647a; stroke-width: 2.5; marker-end: url(#arrow); }
+      .dash { fill: none; stroke: #52647a; stroke-width: 2.5; stroke-dasharray: 8 6; marker-end: url(#arrow); }
+      .note { font: 600 14px sans-serif; fill: #52647a; text-anchor: middle; }
+    </style>
+  </defs>
+  <rect width="1200" height="500" rx="24" fill="#f7f9fc"/>
+  <text x="600" y="48" class="title">참조 무결성을 누가, 언제 확인하는가</text>
+
+  <!-- left: physical FK -->
+  <rect x="40" y="80" width="540" height="390" rx="20" fill="#ffffff" stroke="#d5dde8" stroke-width="2"/>
+  <text x="310" y="118" class="head">물리 FK</text>
+
+  <rect class="box" x="90" y="150" width="170" height="70" fill="#f0eaff" stroke="#a28ad8"/>
+  <text x="175" y="192" class="label">애플리케이션</text>
+
+  <rect class="box" x="90" y="290" width="440" height="140" fill="#e8f2ff" stroke="#76a9e8"/>
+  <text x="310" y="325" class="label">데이터베이스</text>
+  <rect class="box" x="115" y="345" width="170" height="60" fill="#ffffff" stroke="#b8c6d8"/>
+  <text x="200" y="381" class="sub">orders.user_id</text>
+  <rect class="box" x="335" y="345" width="170" height="60" fill="#ffffff" stroke="#b8c6d8"/>
+  <text x="420" y="381" class="sub">users.id</text>
+  <path class="arrow" d="M285 375 H325"/>
+  <text x="310" y="456" class="note" style="fill:#2f6fbf">쓰기마다 DB가 참조를 검사</text>
+
+  <path class="arrow" d="M175 220 V280"/>
+  <text x="330" y="245" class="sub">INSERT / UPDATE / DELETE</text>
+
+  <!-- right: soft FK -->
+  <rect x="620" y="80" width="540" height="390" rx="20" fill="#ffffff" stroke="#d5dde8" stroke-width="2"/>
+  <text x="890" y="118" class="head">soft FK</text>
+
+  <rect class="box" x="660" y="150" width="200" height="90" fill="#f0eaff" stroke="#a28ad8"/>
+  <text x="760" y="188" class="label">애플리케이션</text>
+  <text x="760" y="214" class="sub">쓰기 전에 존재 확인</text>
+
+  <rect class="box" x="910" y="150" width="210" height="90" fill="#fff4db" stroke="#e8bd61"/>
+  <text x="1015" y="188" class="label">점검 배치</text>
+  <text x="1015" y="214" class="sub">고아 데이터 조회 · 알림</text>
+
+  <rect class="box" x="660" y="290" width="460" height="140" fill="#eef1f6" stroke="#9aa9bd"/>
+  <text x="890" y="325" class="label">데이터베이스</text>
+  <rect class="box" x="685" y="345" width="180" height="60" fill="#ffffff" stroke="#b8c6d8"/>
+  <text x="775" y="372" class="sub">orders.user_id</text>
+  <text x="775" y="393" class="sub">(인덱스는 유지)</text>
+  <rect class="box" x="915" y="345" width="180" height="60" fill="#ffffff" stroke="#b8c6d8"/>
+  <text x="1005" y="381" class="sub">users.id</text>
+  <text x="890" y="381" class="note">· · ·</text>
+  <text x="890" y="456" class="note">DB는 참조를 강제하지 않음</text>
+
+  <path class="arrow" d="M760 240 V280"/>
+  <path class="dash" d="M1015 240 V280"/>
+  <text x="1015" y="268" class="note" style="text-anchor:start" dx="10">주기적으로</text>
+</svg>
