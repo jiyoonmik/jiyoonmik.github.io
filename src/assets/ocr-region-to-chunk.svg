@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" role="img" aria-labelledby="title desc">
+  <title id="title">교재 페이지를 영역으로 나눠 OCR하고 청크로 잇는 흐름</title>
+  <desc id="desc">교재 페이지에서 머리말, 제목, 본문 두 단, 활동 박스, 표, 쪽번호 영역을 나눈다. 머리말과 쪽번호는 검색 대상에서 빼고, 영역별로 OCR한 뒤 읽기 순서대로 정렬해 구조 정보를 바탕으로 영역을 묶은 청크로 만들어 벡터 데이터베이스에 적재한다.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6b7380"/>
+    </marker>
+    <style>
+      .title { font: 700 24px sans-serif; fill: #22262c; text-anchor: middle; }
+      .label { font: 700 18px sans-serif; fill: #22262c; text-anchor: middle; }
+      .sub { font: 400 15px sans-serif; fill: #5b6470; text-anchor: middle; }
+      .tag { font: 700 13px sans-serif; text-anchor: start; }
+      .arrow { fill: none; stroke: #6b7380; stroke-width: 2.5; marker-end: url(#arrow); }
+      .box { rx: 16; stroke-width: 2; }
+      .line { stroke: #d5d9df; stroke-width: 5; stroke-linecap: round; }
+      .num { font: 700 13px sans-serif; fill: #ffffff; text-anchor: middle; }
+    </style>
+  </defs>
+  <rect width="1200" height="560" rx="24" fill="#fafafa"/>
+  <text x="600" y="48" class="title">글자를 읽기 전에, 어디를 어떤 순서로 읽을지 먼저 정한다</text>
+
+  <!-- page mock -->
+  <rect x="50" y="80" width="330" height="440" rx="10" fill="#ffffff" stroke="#c3c8cf" stroke-width="2"/>
+
+  <!-- header (excluded) -->
+  <rect x="68" y="94" width="294" height="28" rx="6" fill="#f7eae9" stroke="#cf9f9b" stroke-width="2" stroke-dasharray="6 5"/>
+  <text x="78" y="113" class="tag" fill="#a8645e">머리말 · 검색 제외</text>
+
+  <!-- title -->
+  <rect x="68" y="134" width="294" height="40" rx="6" fill="#f4f5f7" stroke="#c3c8cf" stroke-width="2"/>
+  <text x="78" y="159" class="tag" fill="#5b6470">제목</text>
+  <circle cx="348" cy="154" r="10" fill="#6b7380"/><text x="348" y="159" class="num">1</text>
+
+  <!-- body col 1 -->
+  <rect x="68" y="186" width="140" height="150" rx="6" fill="#f4f5f7" stroke="#c3c8cf" stroke-width="2"/>
+  <text x="78" y="206" class="tag" fill="#5b6470">본문 왼쪽 단</text>
+  <line class="line" x1="80" y1="226" x2="196" y2="226"/>
+  <line class="line" x1="80" y1="246" x2="190" y2="246"/>
+  <line class="line" x1="80" y1="266" x2="196" y2="266"/>
+  <line class="line" x1="80" y1="286" x2="170" y2="286"/>
+  <circle cx="194" cy="320" r="10" fill="#6b7380"/><text x="194" y="325" class="num">2</text>
+
+  <!-- body col 2 -->
+  <rect x="222" y="186" width="140" height="150" rx="6" fill="#f4f5f7" stroke="#c3c8cf" stroke-width="2"/>
+  <text x="232" y="206" class="tag" fill="#5b6470">본문 오른쪽 단</text>
+  <line class="line" x1="234" y1="226" x2="350" y2="226"/>
+  <line class="line" x1="234" y1="246" x2="344" y2="246"/>
+  <line class="line" x1="234" y1="266" x2="350" y2="266"/>
+  <circle cx="348" cy="320" r="10" fill="#6b7380"/><text x="348" y="325" class="num">3</text>
+
+  <!-- activity box -->
+  <rect x="68" y="348" width="294" height="70" rx="6" fill="#f4f5f7" stroke="#c3c8cf" stroke-width="2"/>
+  <text x="78" y="368" class="tag" fill="#5b6470">활동 박스 · 발문</text>
+  <line class="line" x1="80" y1="390" x2="300" y2="390"/>
+  <circle cx="348" cy="404" r="10" fill="#6b7380"/><text x="348" y="409" class="num">4</text>
+
+  <!-- table -->
+  <rect x="68" y="430" width="294" height="50" rx="6" fill="#f4f5f7" stroke="#c3c8cf" stroke-width="2"/>
+  <text x="78" y="450" class="tag" fill="#5b6470">표 · 행·셀 관계 유지</text>
+  <circle cx="348" cy="455" r="10" fill="#6b7380"/><text x="348" y="460" class="num">5</text>
+
+  <!-- page number (excluded) -->
+  <rect x="190" y="490" width="50" height="22" rx="6" fill="#f7eae9" stroke="#cf9f9b" stroke-width="2" stroke-dasharray="6 5"/>
+  <text x="215" y="506" class="sub" style="font-size:12px;fill:#a8645e">쪽번호</text>
+
+  <!-- flow -->
+  <rect class="box" x="440" y="110" width="230" height="110" fill="#ffffff" stroke="#c3c8cf"/>
+  <text x="555" y="150" class="label">영역 설정</text>
+  <text x="555" y="178" class="sub">레이아웃 자동 탐지</text>
+  <text x="555" y="200" class="sub">+ 양식별 규칙으로 보정</text>
+
+  <rect class="box" x="440" y="260" width="230" height="110" fill="#ffffff" stroke="#c3c8cf"/>
+  <text x="555" y="300" class="label">영역별 OCR</text>
+  <text x="555" y="328" class="sub">PaddleOCR</text>
+  <text x="555" y="350" class="sub">영역 + 구조 메타데이터 저장</text>
+
+  <rect class="box" x="440" y="410" width="230" height="110" fill="#ffffff" stroke="#c3c8cf"/>
+  <text x="555" y="450" class="label">읽기 순서 정렬</text>
+  <text x="555" y="478" class="sub">① → ⑤ 순서로 이어 붙임</text>
+  <text x="555" y="500" class="sub">영역 유형 유지</text>
+
+  <rect class="box" x="740" y="200" width="200" height="200" fill="#e7eef6" stroke="#93abc6"/>
+  <text x="840" y="245" class="label" style="fill:#4a6a8c">구조 기반 청킹</text>
+  <text x="840" y="280" class="sub">영역을 묶고 나눠 청크로</text>
+  <text x="840" y="304" class="sub">활동·대화 묶음 유지</text>
+  <text x="840" y="340" class="sub">메타데이터</text>
+  <text x="840" y="362" class="sub">section_path · page · source</text>
+
+  <rect class="box" x="1000" y="240" width="160" height="120" fill="#ffffff" stroke="#c3c8cf"/>
+  <text x="1080" y="292" class="label">벡터 DB</text>
+  <text x="1080" y="320" class="sub">지식베이스 적재</text>
+
+  <path class="arrow" d="M380 300 C410 300 410 165 430 165"/>
+  <path class="arrow" d="M555 220 V250"/>
+  <path class="arrow" d="M555 370 V400"/>
+  <path class="arrow" d="M670 465 C705 465 705 340 730 340"/>
+  <path class="arrow" d="M940 300 H990"/>
+</svg>
