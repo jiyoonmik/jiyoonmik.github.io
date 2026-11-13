@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+  <title id="title">자유 생성·평가 루프와 전략 선택 구조 비교</title>
+  <desc id="desc">이전 구조는 LLM이 본문을 자유 생성하고 LLM judge가 평가한 뒤 점수가 낮으면 재생성과 재평가를 반복해 LLM 호출이 최대 네 번이다. 바뀐 구조는 코드가 진단 사실을 조립하고 LLM은 요청별 스키마로 제한된 전략 ID 하나만 고르며, 코드 검증에 실패하면 기본 전략으로 대체한 뒤 템플릿으로 네 부분 리포트를 렌더링한다. LLM 호출은 한 번이다.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6b7380"/>
+    </marker>
+    <marker id="arrowRed" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#b97a74"/>
+    </marker>
+    <style>
+      .title { font: 700 24px sans-serif; fill: #22262c; text-anchor: middle; }
+      .head { font: 700 20px sans-serif; fill: #22262c; text-anchor: middle; }
+      .label { font: 700 17px sans-serif; fill: #22262c; text-anchor: middle; }
+      .sub { font: 400 14px sans-serif; fill: #5b6470; text-anchor: middle; }
+      .note { font: 600 14px sans-serif; fill: #5b6470; text-anchor: middle; }
+      .arrow { fill: none; stroke: #6b7380; stroke-width: 2.5; marker-end: url(#arrow); }
+      .loop { fill: none; stroke: #b97a74; stroke-width: 2.5; stroke-dasharray: 8 6; marker-end: url(#arrowRed); }
+      .box { rx: 14; stroke-width: 2; }
+    </style>
+  </defs>
+  <rect width="1200" height="600" rx="24" fill="#fafafa"/>
+  <text x="600" y="48" class="title">LLM에게 맡기는 일을 줄이고, 보여주는 내용은 넓힌다</text>
+
+  <!-- left: before -->
+  <rect x="40" y="80" width="520" height="490" rx="20" fill="#ffffff" stroke="#d5d9df" stroke-width="2"/>
+  <text x="300" y="118" class="head">이전: 쓰고, 평가하고, 다시 쓰기</text>
+
+  <rect class="box" x="90" y="145" width="420" height="60" fill="#f4f5f7" stroke="#c3c8cf"/>
+  <text x="300" y="181" class="label">진단 결과 + 검색 문맥</text>
+
+  <rect class="box" x="90" y="245" width="420" height="70" fill="#f7eae9" stroke="#cf9f9b"/>
+  <text x="300" y="275" class="label" style="fill:#a8645e">LLM 자유 생성</text>
+  <text x="300" y="298" class="sub">수치·대상·전략을 모두 문장으로</text>
+
+  <rect class="box" x="90" y="355" width="420" height="70" fill="#f7eae9" stroke="#cf9f9b"/>
+  <text x="300" y="385" class="label" style="fill:#a8645e">LLM judge 평가</text>
+  <text x="300" y="408" class="sub">근거와 점수를 텍스트로 생성</text>
+
+  <rect class="box" x="90" y="465" width="420" height="60" fill="#f4f5f7" stroke="#c3c8cf"/>
+  <text x="300" y="501" class="label">리포트 본문</text>
+
+  <path class="arrow" d="M300 205 V235"/>
+  <path class="arrow" d="M300 315 V345"/>
+  <path class="arrow" d="M300 425 V455"/>
+  <path class="loop" d="M510 390 H535 V280 H520"/>
+  <text x="532" y="340" class="note" style="fill:#a8645e;text-anchor:end" dx="-10">미달 시</text>
+  <text x="532" y="358" class="note" style="fill:#a8645e;text-anchor:end" dx="-10">재생성</text>
+  <text x="300" y="552" class="note">LLM 호출 최대 4회 · 출력은 본문 전체</text>
+
+  <!-- right: after -->
+  <rect x="600" y="80" width="560" height="490" rx="20" fill="#ffffff" stroke="#d5d9df" stroke-width="2"/>
+  <text x="880" y="118" class="head">지금: 고르고, 검증하고, 조립하기</text>
+
+  <rect class="box" x="640" y="145" width="480" height="60" fill="#f4f5f7" stroke="#c3c8cf"/>
+  <text x="880" y="181" class="label">진단 결과 + 관측 근거 + 검색 문맥</text>
+
+  <rect class="box" x="640" y="245" width="220" height="90" fill="#f4f5f7" stroke="#c3c8cf"/>
+  <text x="750" y="280" class="label">코드: 사실 조립</text>
+  <text x="750" y="304" class="sub">수치 · 대상 · 선수 관계</text>
+  <text x="750" y="324" class="sub">추천 자료</text>
+
+  <rect class="box" x="900" y="245" width="220" height="90" fill="#e7eef6" stroke="#93abc6"/>
+  <text x="1010" y="280" class="label" style="fill:#4a6a8c">LLM: 전략 ID 선택</text>
+  <text x="1010" y="304" class="sub">요청별 JSON Schema</text>
+  <text x="1010" y="324" class="sub">유형별 enum 2개</text>
+
+  <rect class="box" x="900" y="365" width="220" height="70" fill="#ffffff" stroke="#c3c8cf"/>
+  <text x="1010" y="395" class="label">코드 검증</text>
+  <text x="1010" y="418" class="sub">실패 시 기본 전략</text>
+
+  <rect class="box" x="640" y="465" width="480" height="60" fill="#ffffff" stroke="#c3c8cf"/>
+  <text x="880" y="492" class="label">템플릿 렌더링: 네 부분 리포트</text>
+  <text x="880" y="514" class="sub">현재 상태 · 추천 이유 · 학습 방법 · 다음 확인</text>
+
+  <path class="arrow" d="M750 205 V235"/>
+  <path class="arrow" d="M1010 205 V235"/>
+  <path class="arrow" d="M1010 335 V355"/>
+  <path class="arrow" d="M750 335 V455"/>
+  <path class="arrow" d="M1010 435 V455"/>
+  <text x="880" y="552" class="note" style="fill:#4a6a8c">LLM 호출 1회 · 출력은 전략 ID 객체</text>
+</svg>
